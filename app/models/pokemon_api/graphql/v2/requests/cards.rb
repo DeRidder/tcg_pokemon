@@ -3,17 +3,51 @@ module PokemonApi
     module V2
       module Requests
         class Cards
-          def self.retrieve
+          def self.retrieve(card_filter = nil)
             response = PokemonApi::Graphql::V2::Client.query(
               <<~GRAPHQL
                 query {
                   cards {
+                    abilities {
+                      effect
+                      name
+                      type
+                    }
+                    attacks {
+                      cost
+                      damage
+                      effect
+                      name
+                    }
                     category
                     description
+                    dexId
+                    effect
+                    energyType
+                    evolveFrom
+                    hp
                     id
+                    illustrator
                     image
+                    item {
+                      effect
+                      name
+                    }
+                    level
+                    localId
                     name
                     rarity
+                    regulationMark
+                    resistances {
+                      type
+                      value
+                    }
+                    retreat
+                    set {
+                      id
+                    }
+                    stage
+                    suffix
                     trainerType
                     types
                     variants {
@@ -22,6 +56,10 @@ module PokemonApi
                       normal
                       reverse
                       wPromo
+                    }
+                    weaknesses {
+                      type
+                      value
                     }
                   }
                 }
